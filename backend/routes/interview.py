@@ -37,20 +37,7 @@ def submit_answer_route():
     #Return the correct answer to the question so the user can see if his answer is correct
     return jsonify({"message": "Answer submitted successfully"}), 201
 
-@interview_bp.route('/questions/<int:id>', methods=['GET'])
-def get_question_by_id(id):
-    question = Question.query.get(id)
-    if not question:
-        return jsonify({"error": "Question not found"}), 404
-    return jsonify({
-        "id": question.id,
-        "title": question.title,
-        "category": question.category,
-        "difficulty": question.difficulty,
-        "ideal_answer": question.ideal_answer
-    })
-
-@interview_bp.route('/answers', methods=['GET'])
+@interview_bp.route('/user_answers', methods=['GET'])
 def get_user_answers():
     user_name = request.args.get('user') #It takes the name from the URL
     if not user_name:
@@ -87,4 +74,18 @@ def post_question():
     db.session.add(new_question)
     db.session.commit()
     return jsonify({"message": "Question added successfully"}), 201
+
+#No se esta usando
+@interview_bp.route('/questions/<int:id>', methods=['GET'])
+def get_question_by_id(id):
+    question = Question.query.get(id)
+    if not question:
+        return jsonify({"error": "Question not found"}), 404
+    return jsonify({
+        "id": question.id,
+        "title": question.title,
+        "category": question.category,
+        "difficulty": question.difficulty,
+        "ideal_answer": question.ideal_answer
+    })
 """

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>TechHelper</title>
+</head>
+<body>
+  <nav>
+    <div><strong>🧠 Tech Interview Trainer</strong></div>
+    <ul>
+      <li><a href="#" class="nav-link" data-target="home">Home</a></li>
+      <li><a href="#" class="nav-link" data-target="practice">Practice</a></li>
+      <li><a href="#" class="nav-link" data-target="history">My History</a></li>
+    </ul>
+  </nav>
+
+  <section id="home" class="active">
+    <h1>Welcome to the Tech Interview Trainer!</h1>
+    <p>Practice real developer interview questions, write your answers, and compare them with ideal solutions.</p>
+    <p>Click "Practice" to get started!</p>
+  </section>
+
+  <section id="practice">
+    <div class="question-card" id="question-card">
+      <h2 id="question-title">Loading question...</h2>
+      <p><strong>Category:</strong> <span id="question-category"></span> | 
+         <strong>Difficulty:</strong> <span id="question-difficulty"></span></p>
+      <textarea id="user-answer" maxlength="500" placeholder="Write your answer here..."></textarea>
+      <button onclick="submitAnswer()">Submit Answer</button>
+      <button onclick="loadRandomQuestion()">Skip</button>
+    </div>
+  </section>
+
+  <section id="history">
+    <h2>📖 Your Previous Answers</h2>
+    <div id="answers-list">
+      <p>Loading history...</p>
+    </div>
+  </section>
+  <script src="script.js"></script>
+</body>
+</html>
