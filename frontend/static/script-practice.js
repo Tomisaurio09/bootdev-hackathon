@@ -1,4 +1,4 @@
-const BACKEND_URL = 'http://localhost:5000';
+const BACKEND_URL = 'https://web-production-5986da.up.railway.app';
 
 let currentQuestionId = null;
 

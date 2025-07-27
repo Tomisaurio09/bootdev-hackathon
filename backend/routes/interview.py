@@ -89,31 +89,4 @@ def delete_answer_history():
     db.session.commit()
     return jsonify({"message": "Answer deleted successfully"}), 200
 
-@interview_bp.route("/post_question", methods=["POST"])
-def post_questions():
-    data = request.get_json()
 
-    # Validar que sea una lista
-    if not isinstance(data, list):
-        return jsonify({"error": "Se esperaba una lista de preguntas"}), 400
-
-    questions = []
-    for item in data:
-        if not all(k in item for k in ('title', 'category', 'difficulty')):
-            return jsonify({"error": f"Entrada inválida: {item}"}), 400
-        
-        question = Question(
-            title=item['title'],
-            category=item['category'],
-            difficulty=item['difficulty'],
-            ideal_answer=item.get('ideal_answer')  # opcional
-        )
-        questions.append(question)
-
-    try:
-        db.session.add_all(questions)
-        db.session.commit()
-        return jsonify({"message": f"{len(questions)} preguntas agregadas exitosamente"}), 201
-    except Exception as e:
-        db.session.rollback()
-        return jsonify({"error": str(e)}), 500
