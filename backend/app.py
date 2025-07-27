@@ -3,12 +3,15 @@ from flask_cors import CORS
 from db import db
 from routes.interview import interview_bp
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 
+load_dotenv(Path(__file__).resolve().parents[1] / 'file.env')
+
 def create_app():
-    load_dotenv()
+
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL') 
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)
