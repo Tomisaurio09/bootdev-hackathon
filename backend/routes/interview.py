@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from models import Question, Answer
 from db import db
 from utils import get_random_question
+import pytz
 
 
 interview_bp = Blueprint('interview', __name__)
@@ -47,12 +48,32 @@ def get_user_answers():
     result = []
     for a in answers:
         result.append({
+            "question_id": a.question_id,
             "question": a.question.title,
             "user_answer": a.user_answer,
             "ideal_answer": a.question.ideal_answer,
-            "timestamp": a.timestamp.isoformat()
+            "timestamp": a.timestamp.astimezone(pytz.utc).isoformat()
         })
     return jsonify(result)
+
+@interview_bp.route('/delete_answer_history', methods=['DELETE'])
+def delete_answer_history():
+    data = request.get_json()
+    question_id = data.get("question_id")
+    user_name = data.get("user_name")
+
+    if not question_id or not user_name:
+        return jsonify({"error": "Missing data"}), 400
+
+    answer = Answer.query.filter_by(question_id=question_id, user_name=user_name).order_by(Answer.timestamp.desc()).first()
+
+    if not answer:
+        return jsonify({"error": "Answer not found"}), 404
+
+    db.session.delete(answer)
+    db.session.commit()
+    return jsonify({"message": "Answer deleted successfully"}), 200
+
 
 
 """
@@ -69,23 +90,27 @@ def post_question():
         title=data['title'],
         category=data['category'],
         difficulty=data['difficulty'],
-        ideal_answer=data.get('ideal_answer')  # Optional field
+        ideal_answer=data.get('ideal_answer')  
     )
     db.session.add(new_question)
     db.session.commit()
     return jsonify({"message": "Question added successfully"}), 201
+"""
 
-#No se esta usando
-@interview_bp.route('/questions/<int:id>', methods=['GET'])
-def get_question_by_id(id):
+"""
+Personal function to edit the category of a question
+
+@interview_bp.route('/edit_database_category/<int:id>', methods=['POST'])
+def edit_database_category(id):
+    data = request.json
+    if not data or 'category' not in data:
+        return jsonify({"error": "Invalid input"}), 400
+
     question = Question.query.get(id)
     if not question:
         return jsonify({"error": "Question not found"}), 404
-    return jsonify({
-        "id": question.id,
-        "title": question.title,
-        "category": question.category,
-        "difficulty": question.difficulty,
-        "ideal_answer": question.ideal_answer
-    })
+
+    question.category = data['category']
+    db.session.commit()
+    return jsonify({"message": "Category updated successfully"}), 200
 """
