@@ -264,3 +264,97 @@ textarea:focus {
 .delete-button:hover {
   background-color: #1b5bc4;  
 }
+
+/* Responsive design */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1.2em;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .features {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .feature-card {
+    width: 90%;
+  }
+
+  section,
+  .home-section {
+    padding: 10px;
+    font-size: 1em;
+  }
+
+  .start-button {
+    font-size: 1em;
+    padding: 12px 24px;
+  }
+
+  textarea {
+    max-width: 100%;
+  }
+
+  .confirm-box {
+    width: 90%;
+  }
+
+  .filters {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .filter-button {
+    width: 100%;
+  }
+
+  .question-card,
+  .answer-card {
+    padding: 15px;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .username-form {
+    width: 90%;
+  }
+
+  .notification-popup {
+    width: 90%;
+    padding: 15px 20px;
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  nav {
+    font-size: 1em;
+  }
+
+  .feature-card {
+    padding: 15px;
+  }
+
+  .start-button {
+    padding: 10px 20px;
+    font-size: 0.95em;
+  }
+
+  .delete-button {
+    font-size: 1em;
+    padding: 6px 12px;
+  }
+}
