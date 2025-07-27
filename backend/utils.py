@@ -1,7 +1,6 @@
 import random
 from models import Question
 
-#implementacion de paginacion con offset y limit para que no sea necesario cargar todas las preguntas a la vez
 def get_random_question(category=None, difficulty=None):
     query = Question.query
 

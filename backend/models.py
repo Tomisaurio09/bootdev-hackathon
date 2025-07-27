@@ -1,5 +1,4 @@
 from db import db
-import datetime
 from datetime import datetime, timezone
 
 class Question(db.Model):

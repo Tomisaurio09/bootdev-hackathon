@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from models import Question, Answer
+from models import Answer
 from db import db
 from utils import get_random_question
 import pytz
@@ -7,8 +7,6 @@ import pytz
 
 interview_bp = Blueprint('interview', __name__)
 
-#So far everything works, but I need to add the ideal answer when the user submits an answer
-#I have to do some changes, but i think that will be mostly in the frontend
 @interview_bp.route('/questions/random', methods=['GET'])
 def get_random_question_route():
     question = get_random_question()
@@ -38,7 +36,7 @@ def get_filtered_random_question():
     })
 
 
-#Its a little bit weird, but I think this is part of the frontend logic
+
 @interview_bp.route('/answers', methods=['POST'])
 def submit_answer_route():
     data = request.json
@@ -52,12 +50,12 @@ def submit_answer_route():
     )
     db.session.add(new_answer)
     db.session.commit()
-    #Return the correct answer to the question so the user can see if his answer is correct
+    
     return jsonify({"message": "Answer submitted successfully"}), 201
 
 @interview_bp.route('/user_answers', methods=['GET'])
 def get_user_answers():
-    user_name = request.args.get('user') #It takes the name from the URL
+    user_name = request.args.get('user') 
     if not user_name:
         return jsonify({"error": "Falta el nombre del usuario"}), 400
 
@@ -90,43 +88,3 @@ def delete_answer_history():
     db.session.delete(answer)
     db.session.commit()
     return jsonify({"message": "Answer deleted successfully"}), 200
-
-
-"""
-Personal function to add a question
-This is not part of the API, but it can be used to add questions to the database:
-"""
-@interview_bp.route("/post_question", methods=["POST"])
-def post_question():
-    data = request.json
-    if not data or 'title' not in data or 'category' not in data or 'difficulty' not in data:
-        return jsonify({"error": "Invalid input"}), 400
-
-    new_question = Question(
-        title=data['title'],
-        category=data['category'],
-        difficulty=data['difficulty'],
-        ideal_answer=data.get('ideal_answer')  
-    )
-    db.session.add(new_question)
-    db.session.commit()
-    return jsonify({"message": "Question added successfully"}), 201
-
-
-"""
-Personal function to edit the category of a question
-
-@interview_bp.route('/edit_database_category/<int:id>', methods=['POST'])
-def edit_database_category(id):
-    data = request.json
-    if not data or 'category' not in data:
-        return jsonify({"error": "Invalid input"}), 400
-
-    question = Question.query.get(id)
-    if not question:
-        return jsonify({"error": "Question not found"}), 404
-
-    question.category = data['category']
-    db.session.commit()
-    return jsonify({"message": "Category updated successfully"}), 200
-"""
