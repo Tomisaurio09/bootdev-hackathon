@@ -15,7 +15,7 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)
-    CORS(app, origins=["https://bootdev-hackathon-brv0rufzr-tomisaurio09s-projects.vercel.app/"])
+    CORS(app)
 
     app.register_blueprint(interview_bp)
 
