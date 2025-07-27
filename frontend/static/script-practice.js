@@ -32,6 +32,38 @@ async function loadRandomQuestion() {
   }
 }
 
+async function loadFilteredQuestion() {
+  const category = document.getElementById("category-filter").value;
+  const difficulty = document.getElementById("difficulty-filter").value;
+
+  let url = `${BACKEND_URL}/questions/random_filtered`;
+
+  const params = new URLSearchParams();
+  if (category) params.append("category", category);
+  if (difficulty) params.append("difficulty", difficulty);
+
+  if (params.toString()) {
+    url += `?${params.toString()}`;
+  }
+
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("No question found.");
+    const data = await res.json();
+
+    currentQuestionId = data.id;
+    document.getElementById("question-title").textContent = data.title;
+    document.getElementById("question-category").textContent = data.category;
+    document.getElementById("question-difficulty").textContent = data.difficulty;
+    document.getElementById("user-answer").value = "";
+  } catch (err) {
+    showNotification("No questions match the selected filters.");
+    console.error(err);
+  }
+}
+
+
+
 function getUserName() {
   return new Promise(resolve => {
     const modal = document.getElementById("username-modal");

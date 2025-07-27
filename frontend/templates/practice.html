@@ -17,6 +17,39 @@
   </nav>
 
   <section>
+    <div class="filters">
+      <label for="category-filter">Category:</label>
+      <select id="category-filter">
+        <option value="">Any</option>
+        <option value="HTTP">HTTP</option>
+        <option value="APIs & API Design">APIs & API Design</option>
+        <option value="Databases & ORM">Databases & ORM</option>
+        <option value="Authentication & Authorization">Authentication & Authorization</option>
+        <option value="Security">Security</option>
+        <option value="Scalability & Performance">Scalability & Performance</option>
+        <option value="Python Fundamentals">Python Fundamentals</option>
+        <option value="Testing">Testing</option>
+        <option value="Design Patterns & Architecture">Design Patterns & Architecture</option>
+        <option value="Caching">Caching</option>
+        <option value="DevOps & CI/CD">DevOps & CI/CD</option>
+        <option value="Cloud & Infrastructure">Cloud & Infrastructure</option>
+        <option value="Logging & Monitoring">Logging & Monitoring</option>
+        <option value="SQL / ORM">SQL/ORM</option>
+        <option value="System Design">System Design</option>
+        <!-- Agregá más según tu base de datos -->
+      </select>
+
+      <label for="difficulty-filter">Difficulty:</label>
+      <select id="difficulty-filter">
+        <option value="">Any</option>
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+
+      <button class="filter-button" onclick="loadFilteredQuestion()">🔍 Filter</button>
+    </div>
+    
     <div class="question-card" id="question-card">
       <h2 id="question-title">Loading question...</h2>
       <p><strong>Category:</strong> <span id="question-category"></span> | 

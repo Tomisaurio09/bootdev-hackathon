@@ -46,6 +46,36 @@ async function loadAnswerHistory() {
   }
 }
 
+
+function customConfirm(message) {
+  return new Promise((resolve) => {
+    const modal = document.getElementById("confirm-modal");
+    const msg = document.getElementById("confirm-message");
+    const yesBtn = document.getElementById("confirm-yes");
+    const noBtn = document.getElementById("confirm-no");
+
+    msg.textContent = message;
+    modal.style.display = "flex";
+
+    const cleanup = () => {
+      modal.style.display = "none";
+      yesBtn.onclick = null;
+      noBtn.onclick = null;
+    };
+
+    yesBtn.onclick = () => {
+      cleanup();
+      resolve(true);
+    };
+
+    noBtn.onclick = () => {
+      cleanup();
+      resolve(false);
+    };
+  });
+}
+
+
 async function deleteAnswer(questionId, buttonElement) {
   const userName = localStorage.getItem("username");
   if (!userName) {
@@ -53,7 +83,7 @@ async function deleteAnswer(questionId, buttonElement) {
     return;
   }
 
-  const confirmDelete = confirm("Are you sure you want to delete this answer?");
+  const confirmDelete = await customConfirm("Are you sure you want to delete this answer?");
   if (!confirmDelete) return;
 
   try {

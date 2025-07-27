@@ -21,6 +21,23 @@ def get_random_question_route():
         "difficulty": question.difficulty
     })
 
+@interview_bp.route('/questions/random_filtered', methods=['GET'])
+def get_filtered_random_question():
+    category = request.args.get('category')
+    difficulty = request.args.get('difficulty')
+
+    question = get_random_question(category, difficulty)
+    if not question:
+        return jsonify({"error": "No questions found"}), 404
+
+    return jsonify({
+        "id": question.id,
+        "title": question.title,
+        "category": question.category,
+        "difficulty": question.difficulty
+    })
+
+
 #Its a little bit weird, but I think this is part of the frontend logic
 @interview_bp.route('/answers', methods=['POST'])
 def submit_answer_route():
@@ -75,11 +92,10 @@ def delete_answer_history():
     return jsonify({"message": "Answer deleted successfully"}), 200
 
 
-
 """
 Personal function to add a question
 This is not part of the API, but it can be used to add questions to the database:
-
+"""
 @interview_bp.route("/post_question", methods=["POST"])
 def post_question():
     data = request.json
@@ -95,7 +111,7 @@ def post_question():
     db.session.add(new_question)
     db.session.commit()
     return jsonify({"message": "Question added successfully"}), 201
-"""
+
 
 """
 Personal function to edit the category of a question

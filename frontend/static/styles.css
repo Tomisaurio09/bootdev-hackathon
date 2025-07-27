@@ -1,3 +1,5 @@
+/* General styles */
+
 body {
   margin: 0;
   font-family: monospace;
@@ -32,7 +34,7 @@ nav a {
 nav a:hover {
   color: #3b82f6;
 }
-/* Home text section */
+/* General sections style */
 section {
   padding: 20px;
   max-width: 800px;
@@ -40,16 +42,71 @@ section {
   font-size: 1.2em;
 }
 
+/* Home styles */
 .home-section {
-  margin-top: 20px;
-  font-size: 1.3em;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.5em;
 }
 
-/* Practice Section */
+.disclaimer {
+  font-size: 0.9em;
+  color: #aaa;
+  margin-top: 20px;
+}
+
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 20px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+}
+
+.feature-card {
+  background: #2b2b40;
+  padding: 20px;
+  border-radius: 8px;
+  width: 250px;
+  text-align: center;
+}
+
+.feature-card h3 {
+  margin-bottom: 10px;
+  color: #3b82f6;
+}
+
+
+.practicing-home {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.start-button {
+  margin-top: 10px;
+  display: inline-block;
+  background-color: #3b82f6;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1.2em;
+  transition: 0.3s ease;
+}
+
+.start-button:hover {
+  background-color: #2563eb;
+}
+
+
+/* Practice Section styles */
 .question-card, .answer-card {
   background-color: #2b2b40;
   padding: 20px;
   border-radius: 8px;
+  margin-top: 2rem;
   margin-bottom: 20px;
 }
 
@@ -124,12 +181,7 @@ textarea:focus {
 }
 
 .username-button {
-  background: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 4px;
   padding: 8px 16px;
-  cursor: pointer;
 }
 
 .notification-popup {
@@ -144,12 +196,65 @@ textarea:focus {
   border-radius: 8px;
   z-index: 2000;
   font-size: 1.2em;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
 }
 
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filters label {
+  font-weight: bold;
+}
+.filters select{
+  padding: 5px;
+  border-radius: 4px;
+  border: none;
+  font-size: 1em;
+}
+
+.filter-button{
+  padding: 8px 16px;
+  margin-bottom: 10px;
+  font-size: 1em;
+}
+
+
+.confirm-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(30, 30, 47, 0.9);
+  z-index: 1001;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirm-box {
+  background: #2b2b40;
+  padding: 30px;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 400px;
+  color: #f5f5f5;
+}
+
+.confirm-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* My history Styles */
 .delete-button {
-  background-color: #3b82f6;  
-  cursor: pointer;
   font-size: 1.2em;
   padding: 8px 16px;  
   border-radius: 50px;  
