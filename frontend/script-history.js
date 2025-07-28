@@ -6,13 +6,13 @@ function showNotification(message) {
   popup.style.display = "block";
   setTimeout(() => {
     popup.style.display = "none";
-  }, 3000);
+  }, 1000);
 }
 
 function escapeHTML(str) {
-  return str.replace(/[&<>"']/g, match => ({
+  return str.replace(/[&<>"]/g, match => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;',
-    '"': '&quot;', "'": '&#039;'
+    '"': '&quot;'
   }[match]));
 }
 

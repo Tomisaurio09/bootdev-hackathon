@@ -8,13 +8,13 @@ function showNotification(message) {
   popup.style.display = "block";
   setTimeout(() => {
     popup.style.display = "none";
-  }, 3000);
+  }, 1000);
 }
 
 function escapeHTML(str) {
-  return str.replace(/[&<>"']/g, match => ({
+  return str.replace(/[&<>"]/g, match => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;',
-    '"': '&quot;', "'": '&#039;'
+    '"': '&quot;'
   }[match]));
 }
 
@@ -71,14 +71,17 @@ function getUserName() {
     const input = document.getElementById("username-input");
     modal.style.display = "flex";
     input.value = "";
+
     input.focus();
 
     form.onsubmit = e => {
       e.preventDefault();
       const name = escapeHTML(input.value.trim());
-      if (name) {
+      if (name && name.length >= 2) {
         modal.style.display = "none";
-        resolve(name);
+        resolve(escapeHTML(name));
+      } else{
+        showNotification("Name must be at least 2 characters");
       }
     };
   });

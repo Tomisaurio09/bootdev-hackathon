@@ -57,7 +57,7 @@ def submit_answer_route():
 def get_user_answers():
     user_name = request.args.get('user') 
     if not user_name:
-        return jsonify({"error": "Falta el nombre del usuario"}), 400
+        return jsonify({"error": "Missing username"}), 400
 
     answers = Answer.query.filter_by(user_name=user_name).all()
     result = []

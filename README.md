@@ -38,7 +38,7 @@ I used **ChatGPT** to help speed up development in a few key areas:
 
 ## 🚀 Try It Out
 
-👉 **Live App**: [Tech Interview Trainer](https://bootdev-hackathon.vercel.app/)
+👉 **Live App**: https://bootdev-hackathon.vercel.app/
 
 ---
 ## 🧪 Extra Features
